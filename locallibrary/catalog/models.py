@@ -88,7 +88,6 @@ class BookInstance(models.Model):
                                  on_delete=models.SET_NULL,
                                  null=True, blank=True)
 
-
     class Meta:
         ordering = ["due_back"]
 
