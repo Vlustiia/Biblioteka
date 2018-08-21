@@ -73,7 +73,7 @@ class BookInstance(models.Model):
     due_back = models.DateField(null=True, blank=True)
 
     LOAN_STATUS = (
-        ('m', 'Maintenance'),
+        ('m', 'Maintenance'),home/      
         ('o', 'On loan'),
         ('a', 'Available'),
         ('r', 'Reserved'),
@@ -90,6 +90,8 @@ class BookInstance(models.Model):
 
     class Meta:
         ordering = ["due_back"]
+        permissions = (("can_mark_returned", "Set book as returned"),)
+
 
     def __str__(self):
         """
