@@ -14,7 +14,7 @@ class RenewBookForm(forms.Form):
         data = self.cleaned_data['renewal_date']
 
         # Проверка того, что дата не выходит за нижнюю границу (не в прошлом)
-        if data > datetime.date.today():
+        if data < datetime.date.today():
             raise ValidationError(_('Неправильная дата - меньше настоящего момента'))
 
         # проверка того, что дата не выходит за верхнюю границу (+4 недели)
@@ -23,3 +23,5 @@ class RenewBookForm(forms.Form):
 
         # Возвращаем очищенные данные
         return data
+
+
