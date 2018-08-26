@@ -12,6 +12,9 @@ urlpatterns = [
     url(r'^mybooks/$', views.LoanedBooksByUserListView.as_view(), name='my-borrowed'),
     url(r'^allborrowedbooks/$', views.LoanedBooksAllUsersListView.as_view(), name='all-borrowed'),
     url(r'^book/(?P<pk>[-\w]+)/renew/$', views.renew_book_librarian, name='renew-book-librarian'),
+    url(r'^author/create/$', views.AuthorCreate.as_view(), name='author_create'),
+    url(r'^author/(?P<pk>[-\w]+)/update/$', views.AuthorUpdate.as_view(), name='author_update'),
+    url(r'^author/(?P<pk>[-\w]+)/delete/$', views.AuthorDelete.as_view(), name='author_delete'),
 ]
 
 
