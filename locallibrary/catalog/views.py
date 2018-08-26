@@ -11,6 +11,10 @@ from django.core.urlresolvers import reverse
 import datetime
 
 from .forms import RenewBookForm, RenewBookModelForm
+from catalog.models import Author
+
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
 
 
 
@@ -29,8 +33,6 @@ def index(request):
     # Number of visits to this view, as counted in the session variable.
     num_visits = request.session.get('num_visits', 0)
     request.session['num_visits'] = num_visits + 1
-
-
 
     #отрисовка HTML шаблона
     return render(
@@ -122,4 +124,22 @@ def renew_book_librarian(request, pk):
         # form = RenewBookForm(initial={'renewal_date': proposed_renewal_date,})
         form = RenewBookModelForm(initial={'due_back': proposed_renewal_date, })
 
-    return render(request, 'catalog/book_renew_librarian.html', {'form': form, 'bookinst':book_inst})
+    return render(request,
+                  'catalog/book_renew_librarian.html',
+                  {'form': form, 'bookinst':book_inst})
+
+
+class AuthorCreate(CreateView):
+    model = Author
+    fields = '__all__'
+    initial = {'date_of_birth': '05/01/2018'}
+
+
+class AuthorUpdate(UpdateView):
+    model = Author
+    fields = ['first_name', 'last_name', 'date_of_birth', 'date_of_death']
+
+
+class AuthorDelete(DeleteView):
+    model = Author
+    success_url = reverse_lazy('authors')
