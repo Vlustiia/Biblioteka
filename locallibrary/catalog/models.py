@@ -58,6 +58,12 @@ class Book(models.Model):
         """
         return reverse('book-detail', args=[str(self.id)])
 
+    class Meta:
+        ordering = ["title"]
+        permissions = (("bookmanage",
+                        "Может создавать, модернизировать, "
+                        "удалять записи о книгах"),)
+
 
 import uuid  # Required for unique book instances
 
@@ -124,6 +130,12 @@ class Author(models.Model):
         Returns the url to access a particular author instance.
         """
         return reverse('author-detail', args=[str(self.id)])
+
+    class Meta:
+        ordering = ["last_name"]
+        permissions = (("authormanage",
+                        "Может создавать, модернизировать, "
+                        "удалять записи об авторах"),)
 
     def __str__(self):
         """
