@@ -9,7 +9,10 @@ pipeline {
             }
             steps {
                 sh 'python --version'
+                sh 'cat README.md'
             }
+
+
         }
     }
 }
