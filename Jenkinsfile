@@ -8,6 +8,10 @@ pipeline {
                     dir 'build'
                 }
             }
+            steps {
+                sh 'python --version'
+            }
+
 
         }
     }
