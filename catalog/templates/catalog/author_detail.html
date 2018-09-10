@@ -1,0 +1,21 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>{{ author.first_name }} {{ author.last_name }} </h1>
+    {{ author.date_of_birth }} - {% if author.date_of_death %} {{ author.date_of_death }}{% endif %}
+
+    <div style="margin-left:20px;margin-top:20px">
+    <h3>Книги автора</h3>
+
+    {% for book in author.book_set.all %}
+    <hr>
+        <!-- Для учебных целей оставлю два варианта вывода -->
+        <h4><a href="{{ book.get_absolute_url }}">{{ book.title }}</a> ({{ book.bookinstance_set.all.count }})</h4>
+        <p>{{ book.summary }}</p>
+        <dt><a href="{% url 'book-detail' book.pk %}">{{book}}</a> ({{book.bookinstance_set.all.count}})</dt>
+        <dd>{{book.summary}}</dd>
+    {% endfor %}
+  </div>
+
+
+{% endblock %}
