@@ -8,7 +8,7 @@ pipeline {
         stage('build') {
             steps {
                 sh 'python --version'
-                cat README.md
+                sh 'cat README.md'
             }
         }
     }
