@@ -13,7 +13,7 @@ pipeline {
 
         stage('test') {
             steps {
-                sh 'cat README.md'
+                sh './manage.py test'
             }
 
         }
