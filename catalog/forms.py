@@ -37,7 +37,6 @@ class RenewBookModelForm(ModelForm):
     """
     Форма, которая наследуется от ModelForm и привязана к модели BookInstance
     """
-
     def clean_due_back(self):
         data = self.cleaned_data['due_back']
 
