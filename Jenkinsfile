@@ -26,7 +26,7 @@ pipeline {
         }
 
         stage('delivery') {
-            agent none
+            agent any
             steps {
                 sh 'docker build -t khatangatao/django-locallibrary-tutorial:latest .'
                 sh 'docker login'
