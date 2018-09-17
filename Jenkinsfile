@@ -29,8 +29,7 @@ pipeline {
             agent any
             steps {
                 sh 'docker build -t khatangatao/django-locallibrary-tutorial:latest .'
-                sh 'docker login'
-                sh 'docker push khatangatao/django-locallibrary-tutorial:latest'
+                sh 'echo Docker image khatangatao/django-locallibrary-tutorial:latest done'
             }
         }
     }
