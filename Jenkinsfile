@@ -1,26 +1,35 @@
 pipeline {
-    agent {
-        dockerfile {
-            filename 'Dockerfile'
-        }
-    }
+    agent none
+
     stages {
         stage('build') {
+            agent {
+                dockerfile {
+                    filename 'Dockerfile'
+                }
+            }
             steps {
-                sh 'python --version'
+                sh 'cat README.md'
             }
         }
 
         stage('test') {
+            agent {
+                dockerfile {
+                    filename 'Dockerfile'
+                }
+            }
             steps {
                 sh './manage.py test'
             }
 
         }
 
-        stage('deploy') {
+        stage('delivery') {
+            agent any
             steps {
-                sh 'echo Deploying...'
+                sh 'docker build -t khatangatao/django-locallibrary-tutorial:latest .'
+                sh 'echo Docker image khatangatao/django-locallibrary-tutorial:latest done'
             }
         }
     }
