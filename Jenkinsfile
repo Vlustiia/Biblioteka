@@ -6,21 +6,34 @@ pipeline {
     }
     stages {
         stage('build') {
+            agent {
+                dockerfile {
+                    filename 'Dockerfile'
+                }
+            }
             steps {
-                sh 'python --version'
+                sh 'cat README.md'
             }
         }
 
         stage('test') {
+            agent {
+                dockerfile {
+                    filename 'Dockerfile'
+                }
+            }
             steps {
                 sh './manage.py test'
             }
 
         }
 
-        stage('deploy') {
+        stage('delivery') {
+            agent none
             steps {
-                sh 'echo Deploying...'
+                sh 'docker build -t khatangatao/django-locallibrary-tutorial:latest .'
+                sh 'docker login'
+                sh 'docker push khatangatao/django-locallibrary-tutorial:latest'
             }
         }
     }
